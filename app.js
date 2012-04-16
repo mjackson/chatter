@@ -67,4 +67,4 @@ strata.get("/messages", function (env, callback) {
   });
 });
 
-strata.run();
+module.exports = strata.app;
