@@ -1,0 +1,68 @@
+html, body {
+  background: #777;
+}
+body {
+  min-width: 640px;
+}
+#right-column, #left-column {
+  position: relative;
+}
+#right-column {
+  position: absolute;
+  right: 20px;
+  width: 200px;
+}
+#left-column {
+  margin: 0 240px 0 20px;
+}
+#users, #events {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  background: white;
+}
+#users {
+}
+#events {
+  height: 400px;
+  margin: 20px 0;
+  padding: 10px 5px;
+  overflow: scroll;
+}
+#events li {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 1px 5px;
+}
+#events li:nth-child(even) {
+  background: #eee;
+}
+#events li:last-child {
+  margin-bottom: 0;
+}
+#events li.info {
+  text-align: center;
+  background: #eef;
+}
+#events li span.user, #events li span.text {
+  display: block;
+}
+#events li span.user {
+  position: absolute;
+  width: 100px;
+  overflow: hidden;
+}
+#events li span.text {
+  margin-left: 120px;
+}
+#new-message {
+  background: white;
+}
+#new-message textarea {
+  margin: 0;
+  resize: none;
+  width: 96%;
+  /* cancel out bootstrap styles */
+  border: none;
+  box-shadow: none;
+}

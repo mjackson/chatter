@@ -1,0 +1,15 @@
+{
+  "author": "Michael Jackson <mjijackson@gmail.com>",
+  "name": "chatter",
+  "description": "A simple chat app written entirely in JavaScript",
+  "version": "0.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "strata": "0.12.4"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
