@@ -19,7 +19,7 @@ function sendMessage(message) {
 }
 
 // Fetches all new messages from the server and call the callback with
-// each new message.
+// an array of all new messages.
 function getMessages(callback) {
   $.ajax("http://" + host + "/messages", {
     dataType: "jsonp",
