@@ -3,6 +3,7 @@ var user = window.prompt("What username would you like to use?");
 
 // The address of the chat server.
 var host = "codeclass.herokuapp.com";
+// host = "localhost:5000"; // dev
 
 // The time (in milliseconds) of the last message we received.
 var since = 0;
