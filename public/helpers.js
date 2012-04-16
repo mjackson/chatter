@@ -1,20 +1,17 @@
-// The handle of the chat user.
-var user = window.prompt("What username would you like to use?");
-
 // The address of the chat server.
 var host = "codeclass.herokuapp.com";
-// host = "localhost:5000"; // dev
+// host = "localhost:1982"; // dev
 
 // The time (in milliseconds) of the last message we received.
 var since = 0;
 
-// Sends the given `message` (a string) to everyone in the chat.
+// Sends the given `message` to everyone in the chat.
 function sendMessage(message) {
   $.ajax("http://" + host + "/messages-create", {
     dataType: "jsonp",
     data: {
-      user: user,
-      message: message
+      user: message.user,
+      message: message.text
     }
   });
 }
@@ -46,5 +43,5 @@ function renderMessage(message) {
   var user = message.user;
   var text = message.text;
   var html = '<li class="message"><span class="user">' + user + ':</span><span class="text">' + text + '</span></li>';
-  $("#messages").append(html);
+  $("#messages").prepend(html);
 }

@@ -9,6 +9,9 @@
     <script type="text/javascript" src="/helpers.js"></script>
     <script type="text/javascript">
 
+    // The handle of the chat user.
+    var user = window.prompt("What username would you like to use?");
+
     $(function () {
 
       // Listen for "Enter" on the #new-message textarea. When it's pressed,
@@ -17,7 +20,7 @@
         if (e.keyCode === 13) {
           e.preventDefault();
           e.stopPropagation();
-          sendMessage($(this).val());
+          sendMessage({ user: user, text: $(this).val() });
           $(this).val("");
         }
       });
