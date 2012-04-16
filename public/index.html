@@ -19,7 +19,7 @@
 
     // host = "localhost:5000";
 
-    // Sends the given `message` to everyone in the chat.
+    // Sends the given `message` (a string) to everyone in the chat.
     function sendMessage(message) {
       $.ajax("http://" + host + "/messages-create", {
         dataType: "jsonp",
