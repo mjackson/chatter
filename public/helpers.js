@@ -4,6 +4,9 @@ var user = window.prompt("What username would you like to use?");
 // The address of the chat server.
 var host = "codeclass.herokuapp.com";
 
+// The time (in milliseconds) of the last message we received.
+var since = 0;
+
 // Sends the given `message` (a string) to everyone in the chat.
 function sendMessage(message) {
   $.ajax("http://" + host + "/messages-create", {
@@ -24,7 +27,15 @@ function getMessages(callback) {
       since: since
     },
     success: function (data, textStatus, xhr) {
-      callback(data.messages);
+      var messages = data.messages;
+
+      callback(messages);
+
+      if (messages.length > 0) {
+        // Update the value of the `since` variable so we don't get
+        // the same messages back again in the future.
+        since = messages[messages.length - 1].time;
+      }
     }
   });
 }
