@@ -16,7 +16,6 @@ var history = [];
 var MAX_HISTORY_LENGTH = 10000;
 
 // GET /messages-create
-// Note: This is a JSONP endpoint!
 strata.get("/messages-create", function (env, callback) {
   var req = strata.Request(env);
 
@@ -37,9 +36,13 @@ strata.get("/messages-create", function (env, callback) {
         history.shift();
       }
 
-      callback(201, {}, "You have successfully added a new message to the chat.");
+      var content = JSON.stringify({ message: "You have successfully added a new message to the chat." });
+
+      callback(201, {"Content-Type": "application/json"}, content);
     } else {
-      callback(400, {}, "You must provide both a user and a message.");
+      var content = JSON.stringify({ message: "You must provide both a user and a message." });
+
+      callback(400, {"Content-Type": "application/json"}, content);
     }
   });
 });
