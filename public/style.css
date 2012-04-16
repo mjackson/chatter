@@ -1,0 +1,53 @@
+html, body {
+  background: #777;
+}
+body {
+  padding: 20px;
+}
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  background: white;
+  height: 400px;
+  margin-bottom: 20px;
+  padding: 10px 5px;
+  overflow: scroll;
+}
+#messages li {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 1px 5px;
+}
+#messages li:nth-child(even) {
+  background: #eee;
+}
+#messages li:last-child {
+  margin-bottom: 0;
+}
+#messages li.info {
+  text-align: center;
+  background: #eef;
+}
+#messages li span.user, #messages li span.text {
+  display: block;
+}
+#messages li span.user {
+  position: absolute;
+  width: 100px;
+  overflow: hidden;
+}
+#messages li span.text {
+  margin-left: 120px;
+}
+#new-message {
+  background: white;
+}
+#new-message textarea {
+  margin: 0;
+  resize: none;
+  width: 96%;
+  /* cancel out bootstrap styles */
+  border: none;
+  box-shadow: none;
+}

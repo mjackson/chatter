@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Chatter</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script type="text/javascript" src="/jquery.js"></script>
+    <script type="text/javascript">
+
+    // The handle of the chat user.
+    var user = window.prompt("What username would you like to use?");
+
+    // The time (in milliseconds) of the last message we received.
+    var since = 0;
+
+    // The address of the chat server.
+    var host = "codeclass.herokuapp.com";
+
+    // for dev...
+    host = "localhost:1982";
+
+    // Sends the given `message` to everyone in the chat.
+    function sendMessage(message) {
+      $.ajax("http://" + host + "/messages-create", {
+        dataType: "jsonp",
+        data: {
+          user: user,
+          message: message
+        }
+      });
+    }
+
+    // Fetches all new messages from the server and call the callback with
+    // each new message.
+    function getMessages(callback) {
+      $.ajax("http://" + host + "/messages", {
+        dataType: "jsonp",
+        data: {
+          since: since
+        },
+        success: function (data, textStatus, xhr) {
+          callback(data.messages);
+        }
+      });
+    }
+
+    // Shows the given `message` on the page.
+    function renderMessage(message) {
+      var user = message.user;
+      var text = message.text;
+      var html = '<li class="message"><span class="user">' + user + ':</span><span class="text">' + text + '</span></li>';
+      $("#messages").append(html);
+    }
+
+    $(function () {
+
+      // Listen for "Enter" on the #new-message textarea. When it's pressed,
+      // send a message to the chat.
+      $("#new-message textarea").keyup(function (e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          e.stopPropagation();
+          sendMessage($(this).val());
+          $(this).val("");
+        }
+      });
+
+      // Poll the server for new messages.
+      var timer = setInterval(function () {
+        getMessages(function (messages) {
+          $.each(messages, function (i, message) {
+            renderMessage(message);
+          });
+
+          // Update the value of the `since` variable so we don't get the same
+          // messages back again in the future.
+          if (messages.length > 0) {
+            since = messages[messages.length - 1].time;
+          }
+        });
+      }, 500);
+
+    });
+
+    </script>
+  </head>
+  <body>
+    <ol id="messages"></ol>
+    <div id="new-message">
+      <textarea></textarea>
+    </div>
+  </body>
+</html>
