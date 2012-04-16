@@ -4,7 +4,6 @@ var path = require("path"),
 
 strata.use(strata.commonLogger);
 strata.use(strata.contentType, "text/html");
-strata.use(strata.contentLength);
 strata.use(strata.file, path.join(__dirname, "public"), "index.html");
 strata.use(strata.jsonp);
 
