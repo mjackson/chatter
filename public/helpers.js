@@ -11,7 +11,7 @@ function sendMessage(message) {
     dataType: "jsonp",
     data: {
       user: message.user,
-      message: message.text
+      text: message.text
     }
   });
 }

@@ -14,20 +14,20 @@ var history = [];
 // The number of events to keep around in the chat history.
 var MAX_HISTORY_LENGTH = 10000;
 
-// GET /messages-create
+// GET /messages-create?user=:user&text=:text
 strata.get("/messages-create", function (env, callback) {
   var req = strata.Request(env);
 
   req.params(function (err, params) {
     var user = params.user;
-    var message = params.message;
+    var text = params.text;
 
-    if (user && message) {
+    if (user && text) {
       // Add the message to the chat history.
       history.push({
         time: (new Date).getTime(),
         user: user,
-        text: message
+        text: text
       });
 
       // Keep the # of items in the history under MAX_HISTORY_LENGTH.
