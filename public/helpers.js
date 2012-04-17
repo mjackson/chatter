@@ -42,6 +42,35 @@ function getMessages(callback) {
 function renderMessage(message) {
   var user = message.user;
   var text = message.text;
-  var html = '<li class="message"><span class="user">' + user + ':</span><span class="text">' + text + '</span></li>';
+
+  var html = '<li class="message">';
+  html += '<span class="user">' + escapeHTML(user) + ':</span>';
+  html += '<span class="text">' + processText(text) + '</span>';
+  html += '</li>';
+
   $("#messages").prepend(html);
+}
+
+var escapeMap = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': '&quot;',
+  "'": '&#39;'
+};
+
+function escapeHTML(string) {
+  return String(string).replace(/[&<>"']/g, function (s) {
+    return escapeMap[s] || s;
+  });
+}
+
+var imageRe = /^http.+?\.(jpe?g|png|gif)$/g;
+
+function processText(text) {
+  if (imageRe.test(text)) {
+    return '<img src="' + escapeHTML(text) + '">';
+  }
+
+  return escapeHTML(text);
 }
