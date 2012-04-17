@@ -21,7 +21,7 @@
         if (e.keyCode === 13) {
           e.preventDefault();
           e.stopPropagation();
-          sendMessage({ user: user, text: $(this).val() });
+          sendMessage({ user: user, text: $.trim($(this).val()) });
           $(this).val("");
         }
       });
